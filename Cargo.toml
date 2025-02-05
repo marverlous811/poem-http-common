@@ -2,6 +2,8 @@
 name = "poem-http-common"
 version = "0.1.0"
 edition = "2021"
+description = "Common HTTP utilities for Poem"
+license = "MIT"
 
 [dependencies]
 poem = { version = "3.1" }
