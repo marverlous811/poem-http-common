@@ -8,7 +8,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Object, Clone)]
 pub struct StatusResponse {
-    status: bool,
+    pub status: bool,
+}
+
+#[derive(Serialize, Deserialize, Debug, Object, Clone)]
+pub struct RedirectResponse {
+    pub url: String,
 }
 
 pub fn build_error_response(code: StatusCode, msg: &str) -> Error {
@@ -51,6 +56,12 @@ where
 {
     #[oai(status = 200)]
     Ok(Json<T>),
+    #[oai(status = 201)]
+    Created(Json<T>),
+    #[oai(status = 301)]
+    MovedPermanently(Json<RedirectResponse>),
+    #[oai(status = 302)]
+    Found(Json<RedirectResponse>),
     #[oai(status = 400)]
     BadRequest(Json<ErrorResponse>),
     #[oai(status = 401)]
